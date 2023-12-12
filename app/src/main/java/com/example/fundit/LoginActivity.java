@@ -181,7 +181,7 @@ public class LoginActivity extends AppCompatActivity {
                         // storing the value in Firebase
                         reference.child(uid).setValue(hashMap);
                     }
-                    Toast.makeText(LoginActivity.this, "Registered User " + user.getEmail(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_LONG).show();
                     Intent mainIntent = new Intent(LoginActivity.this, DashboardActivity.class);
                     mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(mainIntent);

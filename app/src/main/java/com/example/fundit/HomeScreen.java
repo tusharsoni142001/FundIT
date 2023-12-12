@@ -22,7 +22,7 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        Toast.makeText(getApplicationContext(),"HomeScreen",Toast.LENGTH_LONG).show();
+
 
         // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();
