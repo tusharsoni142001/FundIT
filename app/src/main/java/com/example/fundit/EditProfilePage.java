@@ -329,21 +329,22 @@ public class EditProfilePage extends AppCompatActivity {
                             Toast.makeText(EditProfilePage.this, "Unable to update", Toast.LENGTH_LONG).show();
                         }
                     });
+
                     if (key.equals("name")) {
-                        final DatabaseReference databaser = FirebaseDatabase.getInstance().getReference("Posts");
-                        Query query = databaser.orderByChild("uid").equalTo(uid);
+                        final DatabaseReference databasePosts = FirebaseDatabase.getInstance().getReference("Posts");
+                        Query query = databasePosts.orderByChild("uid").equalTo(firebaseUser.getUid());
                         query.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                    String child = databaser.getKey();
+                                    String child = dataSnapshot1.getKey();
                                     dataSnapshot1.getRef().child("uname").setValue(value);
                                 }
                             }
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                                // Handle the error
                             }
                         });
                     }
@@ -361,6 +362,7 @@ public class EditProfilePage extends AppCompatActivity {
         });
         builder.create().show();
     }
+
 
     // Here we are showing image pic dialog where we will select
     // and image either from camera or gallery
