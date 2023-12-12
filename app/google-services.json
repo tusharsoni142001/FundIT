@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "458430557259",
+    "project_id": "fundit-d84c2",
+    "storage_bucket": "fundit-d84c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458430557259:android:2e9128c975db28eeedf1ce",
+        "android_client_info": {
+          "package_name": "com.example.fundit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtfOcASL9AgJdtS0O3MsN4JPViZF0alfM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

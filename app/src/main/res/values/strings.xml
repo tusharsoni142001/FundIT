@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FundIT</string>
+    <string name="sign_in">sign in</string>
+    <string name="sign_up">sign up</string>
 </resources>

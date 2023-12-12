@@ -1,18 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:id="@+id/idRLContainer"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
+    <!-- on below line, we are creating a CardView as a container for the ImageView -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/idCardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="25dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/idPBLoading"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.646">
+
+        <!-- inside the CardView, we place the ImageView -->
+        <ImageView
+            android:id="@+id/idIVLogo"
+            android:layout_width="215dp"
+            android:layout_height="216dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/fundit_logo_2"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center" />
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- ProgressBar remains the same as in your original layout -->
+    <ProgressBar
+        android:id="@+id/idPBLoading"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:layout_below="@id/idCardView"
+        android:indeterminateTint="@android:color/white"
+        android:progressTint="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/idCardView"
+        app:layout_constraintHorizontal_bias="0.683"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.613"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
