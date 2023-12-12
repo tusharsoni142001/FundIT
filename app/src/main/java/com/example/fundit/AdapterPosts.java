@@ -40,7 +40,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class AdapterPosts extends RecyclerView.Adapter<com.example.fundit.AdapterPosts.MyHolder> {
+public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
+
 
     Context context;
     String myuid;
@@ -115,6 +116,7 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.fundit.Adapte
                 liekeref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                         if (mprocesslike) {
                             if (dataSnapshot.child(postid).hasChild(myuid)) {
                                 postref.child(postid).child("plike").setValue("" + (plike - 1));
@@ -152,6 +154,7 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.fundit.Adapte
     }
 
     private void showMoreOptions(ImageButton more, String uid, String myuid, final String pid, final String image) {
+
         PopupMenu popupMenu = new PopupMenu(context, more, Gravity.END);
         if (uid.equals(myuid)) {
             popupMenu.getMenu().add(Menu.NONE, 0, 0, "DELETE");
@@ -183,9 +186,11 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.fundit.Adapte
                         for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                             dataSnapshot1.getRef().removeValue();
                         }
+
                         pd.dismiss();
                         Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_LONG).show();
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -204,11 +209,10 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.fundit.Adapte
         liekeref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 if (dataSnapshot.child(pid).hasChild(myuid)) {
-                    //holder.likebtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_liked, 0, 0, 0);
                     holder.likebtn.setText("Liked");
                 } else {
-                    //holder.likebtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_like, 0, 0, 0);
                     holder.likebtn.setText("Like");
                 }
             }
@@ -218,6 +222,7 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.fundit.Adapte
 
             }
         });
+
     }
 
     @Override
