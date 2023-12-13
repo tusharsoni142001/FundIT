@@ -16,7 +16,7 @@
             android:id="@+id/ptitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/rounded_border"
             android:hint="Enter Title"
             android:minHeight="80dp"
             android:padding="10dp"
@@ -24,18 +24,20 @@
 
         <ImageView
             android:id="@+id/imagep"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginTop="15dp"
-            android:background="@color/white"
-             />
+            android:background="@drawable/rounded_border"
+            android:src="@drawable/photo_library"
+            android:layout_gravity="center"
+            />
 
         <EditText
             android:id="@+id/pdes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:background="@color/white"
+            android:background="@drawable/rounded_border"
             android:gravity="start"
             android:hint="Enter Description"
             android:inputType="textCapSentences|textMultiLine"
