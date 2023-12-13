@@ -280,27 +280,29 @@ public class PostDetailsActivity extends AppCompatActivity {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    String ptitle = dataSnapshot1.child("title").getValue().toString();
-                    String descriptions = dataSnapshot1.child("description").getValue().toString();
-                    uimage = dataSnapshot1.child("uimage").getValue().toString();
-                    hisdp = dataSnapshot1.child("udp").getValue().toString();
+                    String ptitle = getStringValue(dataSnapshot1.child("title"));
+                    String descriptions = getStringValue(dataSnapshot1.child("description"));
+                    uimage = getStringValue(dataSnapshot1.child("uimage"));
+                    hisdp = getStringValue(dataSnapshot1.child("udp"));
                     // hisuid = dataSnapshot1.child("uid").getValue().toString();
-                    String uemail = dataSnapshot1.child("uemail").getValue().toString();
-                    hisname = dataSnapshot1.child("uname").getValue().toString();
-                    ptime = dataSnapshot1.child("ptime").getValue().toString();
-                    plike = dataSnapshot1.child("plike").getValue().toString();
-                    String commentcount = dataSnapshot1.child("pcomments").getValue().toString();
+                    String uemail = getStringValue(dataSnapshot1.child("uemail"));
+                    hisname = getStringValue(dataSnapshot1.child("uname"));
+                    ptime = getStringValue(dataSnapshot1.child("ptime"));
+                    plike = getStringValue(dataSnapshot1.child("plike"));
+                    String commentcount = getStringValue(dataSnapshot1.child("pcomments"));
+
                     Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
                     calendar.setTimeInMillis(Long.parseLong(ptime));
                     String timedate = DateFormat.format("dd/MM/yyyy hh:mm aa", calendar).toString();
+
                     name.setText(hisname);
                     title.setText(ptitle);
                     description.setText(descriptions);
                     like.setText(plike + " Likes");
                     time.setText(timedate);
                     tcomment.setText(commentcount + " Comments");
+
                     if (uimage.equals("noImage")) {
                         image.setVisibility(View.GONE);
                     } else {
@@ -308,24 +310,28 @@ public class PostDetailsActivity extends AppCompatActivity {
                         try {
                             Glide.with(PostDetailsActivity.this).load(uimage).into(image);
                         } catch (Exception e) {
-
+                            // Handle Glide exception
                         }
                     }
+
                     try {
                         Glide.with(PostDetailsActivity.this).load(hisdp).into(picture);
                     } catch (Exception e) {
-
+                        // Handle Glide exception
                     }
-
-
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle database error
+            }
 
+            private String getStringValue(DataSnapshot dataSnapshot) {
+                return dataSnapshot.getValue() != null ? dataSnapshot.getValue().toString() : "";
             }
         });
+
     }
 
     @Override

@@ -49,7 +49,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_unblock" />
 
         <ImageView
             android:id="@+id/seen"
@@ -57,7 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/blocking"
             android:layout_alignParentEnd="true"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_unblock" />
 
     </RelativeLayout>
 
