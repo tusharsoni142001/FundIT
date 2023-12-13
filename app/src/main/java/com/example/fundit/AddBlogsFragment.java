@@ -74,6 +74,7 @@ public class AddBlogsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         firebaseAuth = FirebaseAuth.getInstance();
+        uid=firebaseAuth.getCurrentUser().getUid(); //Current user ID
         View view = inflater.inflate(R.layout.fragment_add_blogs, container, false);
 
         title = view.findViewById(R.id.ptitle);
@@ -86,7 +87,7 @@ public class AddBlogsFragment extends Fragment {
 
         // Retrieving the user data like name ,email and profile pic using query
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-        Query query = databaseReference.orderByChild("email").equalTo(email);
+        Query query = databaseReference.orderByChild("uid").equalTo(uid);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -275,7 +276,7 @@ public class AddBlogsFragment extends Fragment {
                 while (!uriTask.isSuccessful()) ;
                 String downloadUri = uriTask.getResult().toString();
                 if (uriTask.isSuccessful()) {
-                    // if task is successful the update the data into firebase
+                    // if task is successful then update the data into firebase
                     HashMap<Object, String> hashMap = new HashMap<>();
                     hashMap.put("uid", uid);
                     hashMap.put("uname", name);

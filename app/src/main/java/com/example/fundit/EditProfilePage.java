@@ -315,6 +315,7 @@ public class EditProfilePage extends AppCompatActivity {
                     HashMap<String, Object> result = new HashMap<>();
                     result.put(key, value);
                     databaseReference.child(firebaseUser.getUid()).updateChildren(result).addOnSuccessListener(new OnSuccessListener<Void>() {
+
                         @Override
                         public void onSuccess(Void aVoid) {
                             pd.dismiss();

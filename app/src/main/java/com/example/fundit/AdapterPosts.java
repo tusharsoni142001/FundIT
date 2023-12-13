@@ -253,4 +253,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             profile = itemView.findViewById(R.id.profilelayout);
         }
     }
+
+
 }
+
