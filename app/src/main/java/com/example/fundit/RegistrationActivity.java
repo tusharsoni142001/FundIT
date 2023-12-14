@@ -7,6 +7,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import java.util.HashMap;
 public class RegistrationActivity extends AppCompatActivity {
 
     private EditText email, password, name;
+    Spinner sp_user;
     private Button mRegister;
     private TextView existaccount;
     private ProgressDialog progressDialog;
@@ -43,6 +45,7 @@ public class RegistrationActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         email = findViewById(R.id.register_email);
         name = findViewById(R.id.register_name);
+        sp_user=findViewById(R.id.sp_usertype);
         password = findViewById(R.id.register_password);
         mRegister = findViewById(R.id.register_button);
         existaccount = findViewById(R.id.homepage);
@@ -56,6 +59,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 String emaill = email.getText().toString().trim();
                 String uname = name.getText().toString().trim();
                 String pass = password.getText().toString().trim();
+                String userType=sp_user.getSelectedItem().toString();
                 if (!Patterns.EMAIL_ADDRESS.matcher(emaill).matches()) {
                     email.setError("Invalid Email");
                     email.setFocusable(true);
@@ -63,7 +67,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     password.setError("Length Must be greater than 6 character");
                     password.setFocusable(true);
                 } else {
-                    registerUser(emaill, pass, uname);
+                    registerUser(emaill, pass, uname,userType);
                 }
             }
         });
@@ -75,7 +79,7 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
-    private void registerUser(String emaill, final String pass, final String uname) {
+    private void registerUser(String emaill, final String pass, final String uname, String userType) {
         progressDialog.show();
         mAuth.createUserWithEmailAndPassword(emaill, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -89,6 +93,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     hashMap.put("email", email);
                     hashMap.put("uid", uid);
                     hashMap.put("name", uname);
+                    hashMap.put("userType",userType);
                     hashMap.put("onlineStatus", "online");
                     hashMap.put("typingTo", "noOne");
                     hashMap.put("image", "");

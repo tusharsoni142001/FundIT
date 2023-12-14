@@ -28,7 +28,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:scaleType="centerCrop"
-                />
+                android:src="@drawable/profile_image" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
-               />
+                android:src="@drawable/ic_baseline_more_horiz_24" />
 
         </LinearLayout>
 
@@ -123,8 +123,10 @@
                 android:layout_weight="1"
                 android:autoLink="all"
                 android:background="@color/colorWhite"
-                android:padding="5dp"
-                android:text="Like" />
+            android:drawableStart="@drawable/like"
+            android:drawableLeft="@drawable/like"
+            android:padding="5dp"
+            android:text="Like" />
 
             <Button
                 android:id="@+id/comment"
@@ -133,6 +135,8 @@
                 android:layout_weight="1"
                 android:autoLink="all"
                 android:background="@color/colorWhite"
+                android:drawableStart="@drawable/ic_baseline_comment_24"
+                android:drawableLeft="@drawable/ic_baseline_comment_24"
                 android:padding="5dp"
                 android:text="COMMENT" />
 

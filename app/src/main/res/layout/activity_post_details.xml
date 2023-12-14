@@ -44,7 +44,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:scaleType="centerCrop"
-                          />
+                            android:src="@drawable/user_account"/>
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -73,6 +73,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@null"
+                            android:src="@drawable/ic_baseline_more_horiz_24"
                              />
 
                     </LinearLayout>
@@ -133,24 +134,30 @@
                         android:gravity="center"
                         android:orientation="horizontal">
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/like"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:autoLink="all"
-                            android:background="@color/colorWhite"
+                            android:background="@color/white"
+                            android:textColor="@color/black"
                             android:padding="5dp"
-                            android:text="Like" />
+                            android:text="Like"
+                           android:drawableStart="@drawable/like"
+                            android:drawableLeft="@drawable/like"/>
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/share"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@color/colorWhite"
+                            android:background="@color/white"
+                            android:textColor="@color/black"
                             android:padding="5dp"
-                            android:text="SHARE" />
+                            android:text="SHARE"
+                            android:drawableStart="@drawable/share"
+                            android:drawableLeft="@drawable/share"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -160,6 +167,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_baseline_comment_24"
+                android:drawableLeft="@drawable/ic_baseline_comment_24"
                 android:drawablePadding="5dp"
                 android:padding="2dp"
                 android:text="Comments"
@@ -182,7 +191,8 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/commentimge"
             android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_height="50dp"
+            android:src="@drawable/user_account"/>
 
         <EditText
             android:id="@+id/typecommet"

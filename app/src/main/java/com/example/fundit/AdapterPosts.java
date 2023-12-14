@@ -1,7 +1,5 @@
 package com.example.fundit;
 
-
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -40,8 +38,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
-
+public class AdapterPosts extends RecyclerView.Adapter<com.example.fundit.AdapterPosts.MyHolder> {
 
     Context context;
     String myuid;
@@ -65,8 +62,9 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         return new MyHolder(view);
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull final MyHolder holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(@NonNull final MyHolder holder, int position) {
         final String uid = modelPosts.get(position).getUid();
         String nameh = modelPosts.get(position).getUname();
         final String titlee = modelPosts.get(position).getTitle();
@@ -99,6 +97,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         } catch (Exception e) {
 
         }
+
         holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,16 +106,16 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
                 holder.itemView.getContext().startActivity(intent);
             }
         });
+
         holder.likebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final int plike = Integer.parseInt(modelPosts.get(position).getPlike());
+                final int plike = Integer.parseInt(modelPosts.get(holder.getAdapterPosition()).getPlike());
                 mprocesslike = true;
-                final String postid = modelPosts.get(position).getPtime();
+                final String postid = modelPosts.get(holder.getAdapterPosition()).getPtime();
                 liekeref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                         if (mprocesslike) {
                             if (dataSnapshot.child(postid).hasChild(myuid)) {
                                 postref.child(postid).child("plike").setValue("" + (plike - 1));
@@ -137,12 +136,14 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
                 });
             }
         });
+
         holder.more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showMoreOptions(holder.more, uid, myuid, ptime, image);
             }
         });
+
         holder.comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,11 +154,13 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         });
     }
 
-    private void showMoreOptions(ImageButton more, String uid, String myuid, final String pid, final String image) {
 
+    private void showMoreOptions(ImageButton more, String uid, String myuid, final String pid, final String image) {
         PopupMenu popupMenu = new PopupMenu(context, more, Gravity.END);
-        if (uid.equals(myuid)) {
+        if (uid != null && myuid != null && uid.equals(myuid)) {
             popupMenu.getMenu().add(Menu.NONE, 0, 0, "DELETE");
+        } else {
+            Toast.makeText(more.getContext(), "You can't edit this post", Toast.LENGTH_LONG).show();
         }
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -165,12 +168,12 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
                 if (item.getItemId() == 0) {
                     deltewithImage(pid, image);
                 }
-
                 return false;
             }
         });
         popupMenu.show();
     }
+
 
     private void deltewithImage(final String pid, String image) {
         final ProgressDialog pd = new ProgressDialog(context);
@@ -186,7 +189,6 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
                         for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                             dataSnapshot1.getRef().removeValue();
                         }
-
                         pd.dismiss();
                         Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_LONG).show();
                     }
@@ -209,10 +211,11 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         liekeref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 if (dataSnapshot.child(pid).hasChild(myuid)) {
+                    holder.likebtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.like, 0, 0, 0);
                     holder.likebtn.setText("Liked");
                 } else {
+                    holder.likebtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.like, 0, 0, 0);
                     holder.likebtn.setText("Like");
                 }
             }
@@ -222,7 +225,6 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
             }
         });
-
     }
 
     @Override
@@ -253,7 +255,4 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             profile = itemView.findViewById(R.id.profilelayout);
         }
     }
-
-
 }
-

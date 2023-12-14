@@ -24,7 +24,7 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:scaleType="centerCrop"
-
+                android:src="@drawable/user_account"
                 app:civ_circle_background_color="@color/colorPrimaryDark" />
 
             <LinearLayout
@@ -87,7 +87,8 @@
             android:id="@+id/attachbtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@null" />
+            android:background="@null"
+            android:src="@drawable/attach"/>
 
         <EditText
             android:id="@+id/messaget"
@@ -103,7 +104,8 @@
             android:id="@+id/sendmsg"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@null" />
+            android:background="@null"
+            android:src="@drawable/ic_baseline_send_24"/>
 
     </LinearLayout>
 

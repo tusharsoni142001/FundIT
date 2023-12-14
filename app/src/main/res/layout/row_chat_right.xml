@@ -15,8 +15,9 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profilec"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="18dp"
+            android:layout_height="17dp"
+            android:src="@drawable/user_account"
             android:visibility="gone"
             app:civ_border_color="@null" />
 
@@ -46,7 +47,8 @@
             android:layout_alignParentEnd="true"
             android:adjustViewBounds="true"
             android:padding="15dp"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/question"/>
 
     </RelativeLayout>
 

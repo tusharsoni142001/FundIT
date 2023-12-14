@@ -38,10 +38,12 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
-
+        android:drawableStart="@drawable/user"
         android:hint="Your Name..."
         android:inputType="text"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:background="@drawable/edittext_background"
+         />
 
     <TextView
         android:id="@+id/email"
@@ -58,20 +60,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/email"
+        android:drawableStart="@drawable/email"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
-
         android:hint="Email..."
         android:inputType="textEmailAddress"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:background="@drawable/edittext_background" />
+
+    <Spinner
+        android:id="@+id/sp_usertype"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:layout_below="@+id/register_email"
+        android:layout_alignParentStart="true"
+        android:drawableStart="@drawable/ic_baseline_lock_open_24"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="30dp"
+        android:entries="@array/user"
+        android:spinnerMode="dropdown"
+        android:background="@drawable/edittext_background" />
 
     <TextView
         android:id="@+id/pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/register_email"
+        android:layout_below="@id/sp_usertype"
         android:layout_marginStart="35dp"
         android:layout_marginTop="10dp"
         android:text="Password"
@@ -83,13 +100,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/pass"
         android:layout_alignParentStart="true"
+        android:drawableStart="@drawable/ic_baseline_lock_open_24"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
-
         android:hint="Password..."
         android:inputType="textPassword"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:background="@drawable/edittext_background" />
 
     <Button
         android:id="@+id/register_button"
@@ -99,7 +117,6 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
-
         android:padding="4dp"
         android:text="Create Account"
         android:textAllCaps="false"
