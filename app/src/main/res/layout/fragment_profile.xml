@@ -65,12 +65,54 @@
                 </LinearLayout>
 
             </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/cavertv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerposts"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/linearLayout" />
+            <Button
+                android:id="@+id/editprofile"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linearLayout"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Edit Profile" />
+
+            <Button
+                android:id="@+id/company"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editprofile"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Company" />
+
+            <Button
+                android:id="@+id/posts"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/company"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Posts" />
+        </LinearLayout>
+
 
         </RelativeLayout>
 
