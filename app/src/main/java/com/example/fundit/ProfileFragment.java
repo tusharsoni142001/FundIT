@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +52,7 @@ public class ProfileFragment extends Fragment {
     AdapterPosts adapterPosts;
     String uid;
     ProgressDialog pd;
+    Button eprofile,company,uposts;
     private static final int CAMERA_REQUEST = 100;
     private static final int STORAGE_REQUEST = 200;
     private static final int IMAGEPICK_GALLERY_REQUEST = 300;
@@ -85,6 +87,8 @@ public class ProfileFragment extends Fragment {
         loadMyPosts();
         pd.setCanceledOnTouchOutside(false);
 
+        eprofile=view.findViewById(R.id.editprofile);
+
         // Retrieving user data from firebase
         Query query = databaseReference.orderByChild("email").equalTo(firebaseUser.getEmail());
         query.addValueEventListener(new ValueEventListener() {
@@ -115,6 +119,14 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), EditProfilePage.class));
+            }
+        });
+
+        eprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(),founderform.class);
+                startActivity(intent);
             }
         });
         return view;
