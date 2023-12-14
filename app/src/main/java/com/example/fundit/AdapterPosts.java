@@ -81,29 +81,44 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.fundit.Adapte
         String timedate = DateFormat.format("dd/MM/yyyy hh:mm aa", calendar).toString();
         holder.name.setText(nameh);
         holder.title.setText(titlee);
-        holder.description.setText(descri);
+
+
+
+        // Display only a portion of the description
+        if (descri.length() > 100) {
+            String shortDescription = descri.substring(0, 100) + " ...";
+            holder.description.setText(shortDescription);
+            holder.readMoreButton.setVisibility(View.VISIBLE);
+        } else {
+            holder.description.setText(descri);
+            holder.readMoreButton.setVisibility(View.GONE);
+        }
+
         holder.time.setText(timedate);
         holder.like.setText(plike + " Likes");
         holder.comments.setText(comm + " Comments");
         setLikes(holder, ptime);
+
         try {
             Glide.with(context).load(dp).into(holder.picture);
         } catch (Exception e) {
-
+            // Handle Glide exception
         }
+
         holder.image.setVisibility(View.VISIBLE);
         try {
             Glide.with(context).load(image).into(holder.image);
         } catch (Exception e) {
-
+            // Handle Glide exception
         }
 
-        holder.like.setOnClickListener(new View.OnClickListener() {
+        holder.readMoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(holder.itemView.getContext(), PostLikedByActivity.class);
-                intent.putExtra("pid", pid);
-                holder.itemView.getContext().startActivity(intent);
+                // Redirect to the new activity with the full content
+                Intent intent = new Intent(context, PostInformation.class);
+                intent.putExtra("pid", ptime);
+                context.startActivity(intent);
             }
         });
 
@@ -131,7 +146,7 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.fundit.Adapte
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                        // Handle onCancelled
                     }
                 });
             }
@@ -147,6 +162,7 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.fundit.Adapte
         holder.comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Redirect to the new activity with the full content
                 Intent intent = new Intent(context, PostDetailsActivity.class);
                 intent.putExtra("pid", ptime);
                 context.startActivity(intent);
@@ -157,10 +173,12 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.fundit.Adapte
 
     private void showMoreOptions(ImageButton more, String uid, String myuid, final String pid, final String image) {
         PopupMenu popupMenu = new PopupMenu(context, more, Gravity.END);
-        if (uid != null && myuid != null && uid.equals(myuid)) {
+        if (uid.equals(myuid)) {
             popupMenu.getMenu().add(Menu.NONE, 0, 0, "DELETE");
-        } else {
-            Toast.makeText(more.getContext(), "You can't edit this post", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(more.getContext(),"You can't edit this post",Toast.LENGTH_LONG).show();
+            //Toast.makeText(more.getContext(), "hello",Toast.LENGTH_LONG).show();
         }
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -168,12 +186,12 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.fundit.Adapte
                 if (item.getItemId() == 0) {
                     deltewithImage(pid, image);
                 }
+
                 return false;
             }
         });
         popupMenu.show();
     }
-
 
     private void deltewithImage(final String pid, String image) {
         final ProgressDialog pd = new ProgressDialog(context);
@@ -236,7 +254,7 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.fundit.Adapte
         ImageView picture, image;
         TextView name, time, title, description, like, comments;
         ImageButton more;
-        Button likebtn, comment;
+        Button likebtn, comment,readMoreButton;
         LinearLayout profile;
 
         public MyHolder(@NonNull View itemView) {
@@ -253,6 +271,7 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.fundit.Adapte
             likebtn = itemView.findViewById(R.id.like);
             comment = itemView.findViewById(R.id.comment);
             profile = itemView.findViewById(R.id.profilelayout);
+            readMoreButton=itemView.findViewById(R.id.readMoreBtn);
         }
     }
 }

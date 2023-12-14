@@ -42,7 +42,7 @@ public class ProfileFragment extends Fragment {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     ImageView avatartv, covertv;
-    TextView nam, email, phone;
+    TextView nam, email, phone, utype;
     RecyclerView postrecycle;
     StorageReference storageReference;
     String storagepath = "Users_Profile_Cover_image/";
@@ -75,10 +75,11 @@ public class ProfileFragment extends Fragment {
         databaseReference = firebaseDatabase.getReference("Users");
         avatartv = view.findViewById(R.id.avatartv);
         nam = view.findViewById(R.id.nametv);
+        utype = view.findViewById(R.id.userType);
         email = view.findViewById(R.id.emailtv);
         uid = FirebaseAuth.getInstance().getUid();
         fab = view.findViewById(R.id.fab);
-        postrecycle = view.findViewById(R.id.recyclerposts);
+ //       postrecycle = view.findViewById(R.id.recyclerposts);
         posts = new ArrayList<>();
         pd = new ProgressDialog(getActivity());
         loadMyPosts();
@@ -91,8 +92,10 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     String name = "" + dataSnapshot1.child("name").getValue();
+                    String userType = "" + dataSnapshot1.child("userType").getValue();
                     String emaill = "" + dataSnapshot1.child("email").getValue();
                     String image = "" + dataSnapshot1.child("image").getValue();
+                    utype.setText(userType);
                     nam.setText(name);
                     email.setText(emaill);
                     try {
@@ -121,7 +124,7 @@ public class ProfileFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
-        postrecycle.setLayoutManager(layoutManager);
+//        postrecycle.setLayoutManager(layoutManager);
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
         Query query = databaseReference.orderByChild("uid").equalTo(uid);
