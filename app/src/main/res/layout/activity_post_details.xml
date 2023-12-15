@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/post_bg"
     android:layout_height="match_parent"
     tools:context=".PostDetailsActivity">
 
@@ -22,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:cardBackgroundColor="@color/colorWhite"
-                app:cardCornerRadius="3dp"
+                app:cardCornerRadius="30dp"
                 app:cardElevation="3dp"
                 app:cardUseCompatPadding="true"
                 app:contentPadding="5dp">
@@ -140,7 +141,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:autoLink="all"
-                            android:background="@color/white"
+                            android:background="@color/lightBlue"
                             android:textColor="@color/black"
                             android:padding="5dp"
                             android:text="Like"
@@ -152,7 +153,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@color/white"
+                            android:background="@color/purple_200"
                             android:textColor="@color/black"
                             android:padding="5dp"
                             android:text="SHARE"
@@ -174,7 +175,7 @@
                 android:text="Comments"
                 android:textColor="@color/colorBlack" />
 
-            <androidx.recyclerview.widget.RecyclerView
+             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclecomment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
