@@ -46,8 +46,8 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="30dp"
+                android:background="@drawable/edittext_background"
                 android:drawableStart="@drawable/email"
-
                 android:hint="Email..."
                 android:inputType="textEmailAddress"
                 android:padding="8dp" />
@@ -74,7 +74,8 @@
                 android:drawableStart="@drawable/ic_baseline_lock_open_24"
                 android:hint="Password..."
                 android:inputType="textPassword"
-                android:padding="8dp" />
+                android:padding="8dp"
+                android:background="@drawable/edittext_background"/>
 
             <TextView
                 android:id="@+id/forgetp"
