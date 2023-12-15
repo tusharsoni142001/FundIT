@@ -84,7 +84,7 @@ public class ProfileFragment extends Fragment {
  //       postrecycle = view.findViewById(R.id.recyclerposts);
         posts = new ArrayList<>();
         pd = new ProgressDialog(getActivity());
-        loadMyPosts();
+       // loadMyPosts();
         pd.setCanceledOnTouchOutside(false);
 
         eprofile=view.findViewById(R.id.editprofile);
@@ -132,7 +132,7 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
-    private void loadMyPosts() {
+    /*private void loadMyPosts() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
@@ -158,7 +158,7 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-    }
+    }*/
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
