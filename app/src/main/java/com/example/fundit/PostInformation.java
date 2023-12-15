@@ -4,6 +4,7 @@ package com.example.fundit;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
@@ -42,11 +43,11 @@ import java.util.Locale;
 public class PostInformation extends AppCompatActivity {
 
 
-    String hisuid, ptime, myuid, myname, myemail, mydp, uimage, postId, plike, hisdp, hisname;
+    String hisuid, ptime, myuid, myname, myemail, mydp, uimage, postId, plike, hisdp, hisname, uemail;
     ImageView picture, image;
     TextView name, time, title, description, like, tcomment;
     ImageButton more;
-    Button likebtn, share;
+    Button contactbtn, share;
     LinearLayout profile;
     EditText comment;
     ImageButton sendb;
@@ -61,7 +62,7 @@ public class PostInformation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post_details);
+        setContentView(R.layout.activity_post_information);
         actionBar = getSupportActionBar();
         actionBar.setTitle("Post Details");
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -72,15 +73,15 @@ public class PostInformation extends AppCompatActivity {
         image = findViewById(R.id.pimagetvco);
         name = findViewById(R.id.unameco);
         time = findViewById(R.id.utimeco);
-        more = findViewById(R.id.morebtn);
+
         title = findViewById(R.id.ptitleco);
         myemail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         myuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         description = findViewById(R.id.descriptco);
-       /* tcomment = findViewById(R.id.pcommenttv);
-        like = findViewById(R.id.plikebco);
-        likebtn = findViewById(R.id.like);
-        comment = findViewById(R.id.typecommet);
+       // tcomment = findViewById(R.id.pcommenttv);
+       // like = findViewById(R.id.plikebco);
+        contactbtn = findViewById(R.id.contact);
+      /*  comment = findViewById(R.id.typecommet);
         sendb = findViewById(R.id.sendcomment);
         imagep = findViewById(R.id.commentimge);
         share = findViewById(R.id.share);*/
@@ -98,12 +99,46 @@ public class PostInformation extends AppCompatActivity {
                 postComment();
             }
         });*/
-       /* likebtn.setOnClickListener(new View.OnClickListener() {
+        contactbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                likepost();
+                Intent emailIntent=new Intent(Intent.ACTION_SEND);
+
+                // Default Subject
+                String defaultSubject = "Exploring Collaboration: [Your Startup Name]";
+
+                // Default Body
+                String defaultBody = "Dear "+hisname+",\n\n" +
+                        "I hope this email finds you well. My name is "+myname+", and I am reaching out to express my interest in learning more about your startup, [Your Startup Name].\n\n" +
+                        "I am an investor interested in exploring potential investment opportunities, and I believe that your startup has great potential. I would appreciate the opportunity to discuss this further with you and learn more about your vision and plans for the future.\n\n" +
+                        "Please let me know if you would be available for a meeting or a call at your earliest convenience. I am excited about the prospect of potentially working together and contributing to the success of [Your Startup Name].\n\n" +
+                        "Thank you for considering my inquiry. I look forward to hearing from you.\n\n" +
+                        "Best regards,\n" +
+                        myname+"\n";
+
+
+
+
+                //email Address
+                emailIntent.putExtra(Intent.EXTRA_EMAIL,new String[]{uemail});
+                //subject
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT,defaultSubject);
+                //body
+                emailIntent.putExtra(Intent.EXTRA_TEXT,defaultBody);
+
+                emailIntent.setType("message/rfc822");
+
+                //chck if client email is available
+                if(emailIntent.resolveActivity(getPackageManager())!=null)
+                {
+                    startActivity(Intent.createChooser(emailIntent,"Choose email client:"));
+                }
+                else
+                {
+                    Toast.makeText(PostInformation.this,"No email client found: "+uemail,Toast.LENGTH_LONG).show();
+                }
             }
-        });*/
+        });
        /* like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -228,6 +263,7 @@ public class PostInformation extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     myname = dataSnapshot1.child("name").getValue().toString();
+                    myname = dataSnapshot1.child("name").getValue().toString();
                     mydp = dataSnapshot1.child("image").getValue().toString();
                     try {
                         Glide.with(PostInformation.this).load(mydp).into(imagep);
@@ -244,6 +280,8 @@ public class PostInformation extends AppCompatActivity {
         });
     }
 
+
+
     private void loadPostInfo() {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
@@ -257,7 +295,7 @@ public class PostInformation extends AppCompatActivity {
                     uimage = getStringValue(dataSnapshot1.child("uimage"));
                     hisdp = getStringValue(dataSnapshot1.child("udp"));
                     // hisuid = dataSnapshot1.child("uid").getValue().toString();
-                    String uemail = getStringValue(dataSnapshot1.child("uemail"));
+                    uemail = getStringValue(dataSnapshot1.child("uemail"));
                     hisname = getStringValue(dataSnapshot1.child("uname"));
                     ptime = getStringValue(dataSnapshot1.child("ptime"));
                     plike = getStringValue(dataSnapshot1.child("plike"));
