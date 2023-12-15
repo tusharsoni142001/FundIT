@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:cardBackgroundColor="@color/colorWhite"
-                app:cardCornerRadius="30dp"
+                app:cardCornerRadius="15dp"
                 app:cardElevation="3dp"
                 app:cardUseCompatPadding="true"
                 app:contentPadding="5dp">
