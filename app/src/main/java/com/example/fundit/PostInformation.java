@@ -67,7 +67,7 @@ public class PostInformation extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
         postId = getIntent().getStringExtra("pid");
-        recyclerView = findViewById(R.id.recyclecomment);
+        //recyclerView = findViewById(R.id.recyclecomment);
         picture = findViewById(R.id.pictureco);
         image = findViewById(R.id.pimagetvco);
         name = findViewById(R.id.unameco);
@@ -77,44 +77,44 @@ public class PostInformation extends AppCompatActivity {
         myemail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         myuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         description = findViewById(R.id.descriptco);
-        tcomment = findViewById(R.id.pcommenttv);
+       /* tcomment = findViewById(R.id.pcommenttv);
         like = findViewById(R.id.plikebco);
         likebtn = findViewById(R.id.like);
         comment = findViewById(R.id.typecommet);
         sendb = findViewById(R.id.sendcomment);
         imagep = findViewById(R.id.commentimge);
-        share = findViewById(R.id.share);
+        share = findViewById(R.id.share);*/
         profile = findViewById(R.id.profilelayoutco);
         progressDialog = new ProgressDialog(this);
         loadPostInfo();
 
         loadUserInfo();
-        setLikes();
+        //setLikes();
         actionBar.setSubtitle("SignedInAs:" + myemail);
-        loadComments();
-        sendb.setOnClickListener(new View.OnClickListener() {
+       // loadComments();
+       /* sendb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 postComment();
             }
-        });
-        likebtn.setOnClickListener(new View.OnClickListener() {
+        });*/
+       /* likebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 likepost();
             }
-        });
-        like.setOnClickListener(new View.OnClickListener() {
+        });*/
+       /* like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PostInformation.this, PostLikedByActivity.class);
                 intent.putExtra("pid", postId);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 
-    private void loadComments() {
+    /*private void loadComments() {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -137,9 +137,9 @@ public class PostInformation extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
-    private void setLikes() {
+   /* private void setLikes() {
         final DatabaseReference liekeref = FirebaseDatabase.getInstance().getReference().child("Likes");
         liekeref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -157,38 +157,9 @@ public class PostInformation extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
-    private void likepost() {
-
-        mlike = true;
-        final DatabaseReference liekeref = FirebaseDatabase.getInstance().getReference().child("Likes");
-        final DatabaseReference postref = FirebaseDatabase.getInstance().getReference().child("Posts");
-        liekeref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                if (mlike) {
-                    if (dataSnapshot.child(postId).hasChild(myuid)) {
-                        postref.child(postId).child("plike").setValue("" + (Integer.parseInt(plike) - 1));
-                        liekeref.child(postId).child(myuid).removeValue();
-                        mlike = false;
-
-                    } else {
-                        postref.child(postId).child("plike").setValue("" + (Integer.parseInt(plike) + 1));
-                        liekeref.child(postId).child(myuid).setValue("Liked");
-                        mlike = false;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
+  /*
     private void postComment() {
         progressDialog.setMessage("Adding Comment");
 
@@ -223,9 +194,9 @@ public class PostInformation extends AppCompatActivity {
                 Toast.makeText(PostInformation.this, "Failed", Toast.LENGTH_LONG).show();
             }
         });
-    }
+    }*/
 
-    boolean count = false;
+    /*boolean count = false;
 
     private void updatecommetcount() {
         count = true;
@@ -247,7 +218,7 @@ public class PostInformation extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
     private void loadUserInfo() {
 
@@ -299,9 +270,9 @@ public class PostInformation extends AppCompatActivity {
                     name.setText(hisname);
                     title.setText(ptitle);
                     description.setText(descriptions);
-                    like.setText(plike + " Likes");
+                    //like.setText(plike + " Likes");
                     time.setText(timedate);
-                    tcomment.setText(commentcount + " Comments");
+                    //tcomment.setText(commentcount + " Comments");
 
                     if (uimage.equals("noImage")) {
                         image.setVisibility(View.GONE);

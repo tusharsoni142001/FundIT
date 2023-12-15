@@ -133,26 +133,27 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:autoLink="all"
-                android:background="@color/colorWhite"
-            android:drawableStart="@drawable/like"
-            android:drawableLeft="@drawable/like"
-            android:padding="5dp"
-            android:text="Like" />
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:padding="5dp"
+                android:text="Like"
 
-            <Button
+                android:drawableLeft="@drawable/like"/>
+
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:autoLink="all"
                 android:background="@color/colorWhite"
-                android:drawableStart="@drawable/ic_baseline_comment_24"
+
                 android:drawableLeft="@drawable/ic_baseline_comment_24"
                 android:padding="5dp"
                 android:text="COMMENT" />
