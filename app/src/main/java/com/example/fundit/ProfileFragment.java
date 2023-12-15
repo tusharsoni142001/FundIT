@@ -115,6 +115,7 @@ public class ProfileFragment extends Fragment {
 
             }
         });
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,6 +130,14 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        company.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(),CompanyForm.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 

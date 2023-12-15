@@ -16,7 +16,7 @@
         android:layout_marginTop="10dp"
         android:text="Startup Information"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="20dp"
+        android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -37,13 +37,14 @@
             android:layout_height="wrap_content"
             android:text="Company Name:"
             android:textSize="20dp"
+            android:textStyle="bold"
             android:layout_marginLeft="5dp"/>
         <EditText
             android:id="@+id/userName"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:textSize="20dp"
-            android:background="#5676"
+            android:background=""
             android:hint="Enter Username.."
             android:layout_marginLeft="3dp"/>
     </LinearLayout>
