@@ -88,7 +88,6 @@ public class PostInformation extends AppCompatActivity {
         profile = findViewById(R.id.profilelayoutco);
         progressDialog = new ProgressDialog(this);
         loadPostInfo();
-
         loadUserInfo();
         //setLikes();
         actionBar.setSubtitle("SignedInAs:" + myemail);

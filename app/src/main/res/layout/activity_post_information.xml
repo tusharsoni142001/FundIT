@@ -152,6 +152,11 @@
           app:cardElevation="3dp"
           app:cardUseCompatPadding="true"
           app:contentPadding="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+          android:text="Company Details:"/>
       </androidx.cardview.widget.CardView>
       </ScrollView>
 

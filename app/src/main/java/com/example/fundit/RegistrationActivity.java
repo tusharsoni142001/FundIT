@@ -92,6 +92,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 String pass = password.getText().toString().trim();
                 String userType=sp_user.getSelectedItem().toString();
                 String companyName=companyname.getText().toString();
+
                 if (!Patterns.EMAIL_ADDRESS.matcher(emaill).matches()) {
                     email.setError("Invalid Email");
                     email.setFocusable(true);
@@ -131,8 +132,19 @@ public class RegistrationActivity extends AppCompatActivity {
                     hashMap.put("typingTo", "noOne");
                     hashMap.put("image", "");
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+                    //Reference to create Users node in database
                     DatabaseReference reference = database.getReference("Users");
                     reference.child(uid).setValue(hashMap);
+
+                    //Reference to create Company node in database
+                    HashMap<Object,String> companyHashMap=new HashMap<>();
+                    companyHashMap.put("companyName",companyName);
+                    companyHashMap.put("uid",uid);
+
+                    DatabaseReference companyReference=database.getReference("Companies");
+                    companyReference.child(uid).setValue(companyHashMap);
+
                     Toast.makeText(RegistrationActivity.this, "Registered Successfully", Toast.LENGTH_LONG).show();
                     Intent mainIntent = new Intent(RegistrationActivity.this, DashboardActivity.class);
                     mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
