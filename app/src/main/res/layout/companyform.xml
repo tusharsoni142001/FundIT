@@ -17,6 +17,7 @@
         android:text="Startup Information"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="40dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -30,21 +31,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="5dp">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Company Name:"
             android:textSize="20dp"
             android:textStyle="bold"
             android:layout_marginLeft="5dp"/>
-        <EditText
-            android:id="@+id/userName"
-            android:layout_width="300dp"
+        <TextView
+            android:id="@+id/companyName"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:textSize="20dp"
-            android:hint="Enter Username.."
+            android:hint=""
             android:layout_marginLeft="3dp"/>
     </LinearLayout>
     <TextView
@@ -56,28 +57,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="5dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Founded in:"
+            android:text="Founded in Year:"
             android:textSize="20dp"
             android:textStyle="bold"
             android:layout_marginLeft="5dp" />
-        <EditText
-            android:id="@+id/userPassword"
-            android:layout_width="300dp"
+        <TextView
+            android:id="@+id/foundedyear"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:textSize="20dp"
-            android:hint="Enter Password.."
-            android:layout_marginLeft="13dp"
+            android:hint="DD-MM-YYYY.."
+            android:layout_margin="10dp"
             android:inputType="number" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="5dp">
         <TextView
             android:layout_width="wrap_content"
@@ -88,41 +89,15 @@
             android:layout_marginLeft="5dp" />
         <EditText
             android:id="@+id/userContact"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:textSize="20dp"
-            android:hint="Enter Contact No.."
-            android:layout_marginLeft="32dp"
+            android:hint=""
+            android:layout_margin="10dp"
             android:inputType="number" />
 
     </LinearLayout>
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gender"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_marginRight="35dp"
-            android:layout_marginLeft="5dp"/>
-        <RadioButton
-            android:id="@+id/Male"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Male"
-            android:gravity="center"
-            android:textSize="20dp"/>
-        <RadioButton
-            android:id="@+id/Female"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Female"
-            android:gravity="center"
-            android:textSize="20dp"/>
-    </RadioGroup>
+
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -131,7 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:text="Skills"
+            android:text="Language"
             android:textStyle="bold"
             android:layout_marginRight="53dp"
             android:layout_marginLeft="5dp"/>
@@ -170,22 +145,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Comment"
+            android:text="About Comapny"
             android:textStyle="bold"
             android:textSize="20dp"
 
             android:layout_marginLeft="5dp"/>
         <EditText
-            android:id="@+id/usercomment"
-            android:layout_width="300dp"
+            android:id="@+id/abtcompany"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:hint="Enter your comments.."
-            android:layout_marginLeft="15dp" />
+            android:hint="."
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp" />
 
     </LinearLayout>
     <Button
