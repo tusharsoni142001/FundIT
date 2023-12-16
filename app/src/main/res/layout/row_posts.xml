@@ -139,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:autoLink="all"
-                android:background="@color/lightBlue"
+                android:background="@drawable/rounded_corner_blue"
                 android:textColor="@color/black"
                 android:padding="5dp"
                 android:text="Like"
@@ -152,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:autoLink="all"
-                android:background="@color/purple_200"
+                android:background="@drawable/rounded_corner"
 
                 android:drawableLeft="@drawable/ic_baseline_comment_24"
                 android:padding="5dp"

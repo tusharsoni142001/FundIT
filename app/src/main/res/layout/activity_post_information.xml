@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/white"
+    android:padding="15dp"
     android:layout_height="match_parent"
     tools:context=".PostDetailsActivity">
 
@@ -26,6 +27,7 @@
           app:cardElevation="3dp"
           app:cardUseCompatPadding="true"
           app:contentPadding="5dp">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,7 +60,7 @@
                   android:layout_height="wrap_content"
                   android:text="Name"
                   android:textColor="@color/colorBlack"
-                  android:textSize="20sp" />
+                  android:textSize="27sp" />
 
               <TextView
                   android:id="@+id/utimeco"
@@ -75,7 +77,8 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:text="Title"
-              android:textSize="16sp"
+              android:textSize="25sp"
+              android:layout_marginBottom="10dp"
               android:textStyle="bold" />
 
           <TextView
@@ -83,6 +86,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:text="Description"
+              android:textSize="25sp"
               android:textColor="@color/colorBlack" />
 
           <ImageView
@@ -113,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:autoLink="all"
-                android:background="@color/lightBlue"
+                android:background="@drawable/rounded_corner_blue"
                 android:padding="5dp"
                 android:text="Contact Founder"
                 android:textColor="@color/black" />
@@ -123,17 +127,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/purple_200"
+                android:background="@drawable/rounded_corner"
                 android:drawableStart="@drawable/share"
                 android:drawableLeft="@drawable/share"
                 android:padding="5dp"
                 android:text="SHARE"
                 android:textColor="@color/black" />
+
           </LinearLayout>
 
         </LinearLayout>
 
       </androidx.cardview.widget.CardView>
+      <ScrollView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+      <androidx.cardview.widget.CardView
+          android:layout_width="match_parent"
+          android:layout_height="225dp"
+          android:orientation="vertical"
+          app:cardBackgroundColor="@color/colorWhite"
+          app:cardCornerRadius="15dp"
+          app:cardElevation="3dp"
+          app:cardUseCompatPadding="true"
+          app:contentPadding="5dp">
+      </androidx.cardview.widget.CardView>
+      </ScrollView>
+
+
 
     </LinearLayout>
 
