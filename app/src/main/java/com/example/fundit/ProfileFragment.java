@@ -88,6 +88,7 @@ public class ProfileFragment extends Fragment {
         pd.setCanceledOnTouchOutside(false);
 
         eprofile=view.findViewById(R.id.editprofile);
+        company=view.findViewById(R.id.companyDetails);
 
         // Retrieving user data from firebase
         Query query = databaseReference.orderByChild("email").equalTo(firebaseUser.getEmail());
