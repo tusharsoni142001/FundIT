@@ -124,13 +124,7 @@ public class EditProfilePage extends AppCompatActivity {
             }
         });
 
-        editname.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pd.setMessage("Updating Name");
-                showNamephoneupdate("name");
-            }
-        });
+
     }
 
     @Override

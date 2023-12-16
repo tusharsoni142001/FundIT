@@ -131,6 +131,52 @@ public class founderform  extends AppCompatActivity {
                         // If field exists, retrieve its value
                         String expertise = "" + dataSnapshot1.child("expertise").getValue();
 
+                        String expArr[]=expertise.split(",");
+                        for(int i=0;i<expArr.length;i++)
+                        {
+                            switch(expArr[i].trim())
+                            {
+                                case "Product Development": if("Product Development".equals(expArr[i].trim()))
+                                                            {
+                                                                cb1.setChecked(true);
+                                                            }
+                                                            else
+                                                            {
+                                                                cb1.setChecked(false);
+                                                            }
+                                                            break;
+
+                                case "Business Development": if("Business Development".equals(expArr[i].trim()))
+                                                            {
+                                                                cb2.setChecked(true);
+                                                            }
+                                                            else
+                                                            {
+                                                                cb2.setChecked(false);
+                                                            }
+                                                            break;
+
+                                case "Marketing and Growth": if("Marketing and Growth".equals(expArr[i].trim()))
+                                                            {
+                                                                cb3.setChecked(true);
+                                                            }
+                                                            else
+                                                            {
+                                                                cb3.setChecked(false);
+                                                            }
+                                                            break;
+
+                                case "Operations and Finance": if("Operations and Finance".equals(expArr[i].trim()))
+                                                            {
+                                                                cb4.setChecked(true);
+                                                            }
+                                                            else
+                                                            {
+                                                                cb4 .setChecked(false);
+                                                            }
+                                                            break;
+                            }
+                        }
                         // Check if the retrieved value is not null before using it
                         if (uabout != null) {
                             about.setText(uabout);
