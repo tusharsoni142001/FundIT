@@ -135,7 +135,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/like"
-                android:layout_width="wrap_content"
+                android:layout_width="15dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:autoLink="all"
@@ -147,8 +147,9 @@
                 android:drawableLeft="@drawable/like"/>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginStart="10dp"
                 android:id="@+id/comment"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:autoLink="all"
