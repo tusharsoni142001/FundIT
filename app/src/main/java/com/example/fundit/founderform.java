@@ -30,7 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 
 public class founderform  extends AppCompatActivity {
-    private EditText email, name, about;
+    private TextView email, name;
     private Button submit;
 
     @Override
