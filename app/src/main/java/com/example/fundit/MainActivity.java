@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
 
                 startActivity(iHome);
+                finish();
 
             }
         },2000);

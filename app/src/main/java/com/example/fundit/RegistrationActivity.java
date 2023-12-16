@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -28,10 +29,10 @@ import java.util.HashMap;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private EditText email, password, name;
+    private EditText email, password, name, companyname;
     Spinner sp_user;
     private Button mRegister;
-    private TextView existaccount;
+    private TextView existaccount,companyTitle;
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
 
@@ -39,6 +40,7 @@ public class RegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Create Account");
         actionBar.setDisplayShowHomeEnabled(true);
@@ -49,9 +51,38 @@ public class RegistrationActivity extends AppCompatActivity {
         password = findViewById(R.id.register_password);
         mRegister = findViewById(R.id.register_button);
         existaccount = findViewById(R.id.homepage);
+        companyname=findViewById(R.id.companyName);
+        companyTitle=findViewById(R.id.company);
         mAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Register");
+
+
+        //Checking userType
+        //If founder company name EditText will become visible
+        sp_user.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
+                String selectedUserType = sp_user.getSelectedItem().toString();
+                // Show/hide the companyName EditText based on the selected item
+                if ("Founder".equals(selectedUserType)) {
+                    // Show companyName EditText when the first item is selected
+                    companyname.setVisibility(View.VISIBLE);
+                    companyTitle.setVisibility(View.VISIBLE);
+                } else {
+                    // Hide companyName EditText for other items
+                    companyname.setVisibility(View.GONE);
+                    companyTitle.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // Do nothing here
+            }
+        });
+
 
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +91,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 String uname = name.getText().toString().trim();
                 String pass = password.getText().toString().trim();
                 String userType=sp_user.getSelectedItem().toString();
+                String companyName=companyname.getText().toString();
                 if (!Patterns.EMAIL_ADDRESS.matcher(emaill).matches()) {
                     email.setError("Invalid Email");
                     email.setFocusable(true);
@@ -67,7 +99,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     password.setError("Length Must be greater than 6 character");
                     password.setFocusable(true);
                 } else {
-                    registerUser(emaill, pass, uname,userType);
+                    registerUser(emaill, pass, uname,userType,companyName);
                 }
             }
         });
@@ -79,7 +111,7 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
-    private void registerUser(String emaill, final String pass, final String uname, String userType) {
+    private void registerUser(String emaill, final String pass, final String uname, String userType,String companyName) {
         progressDialog.show();
         mAuth.createUserWithEmailAndPassword(emaill, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -94,6 +126,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     hashMap.put("uid", uid);
                     hashMap.put("name", uname);
                     hashMap.put("userType",userType);
+                    hashMap.put("companyName",companyName);
                     hashMap.put("onlineStatus", "online");
                     hashMap.put("typingTo", "noOne");
                     hashMap.put("image", "");

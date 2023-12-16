@@ -78,7 +78,7 @@ public class DashboardActivity extends AppCompatActivity {
                     return true;*/
 
                 case R.id.nav_addblogs:
-                    actionBar.setTitle("Add Blogs");
+                    actionBar.setTitle("Add Startup Post");
                     AddBlogsFragment fragment4 = new AddBlogsFragment();
                     FragmentTransaction fragmentTransaction4 = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction4.replace(R.id.content, fragment4, "");

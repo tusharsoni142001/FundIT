@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit Founder Profile"
-        android:textStyle="bold"
-        android:textSize="40dp"
-        android:textColor="#307D7E"
+        android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"/>
+        android:text="Update Founder Profile"
+        android:textColor="#307D7E"
+        android:textSize="40dp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,12 +37,12 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="30dp"
         android:background="@drawable/edittext_background"
+        android:drawableStart="@drawable/user"
         android:hint="Enter your full name"
         android:inputType="textPersonName"
         android:paddingStart="10dp"
         android:required="true"
-        android:textSize="19sp"
-        android:drawableStart="@drawable/user"/>
+        android:textSize="19sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -67,7 +74,7 @@
         android:hint="Experience:"
         android:textStyle="bold"
         android:layout_marginStart="35dp"/>
-    <TextView
+    <EditText
         android:id="@+id/et_experience"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -140,7 +147,7 @@
         android:hint="Education:"
         android:textStyle="bold"
         android:layout_marginStart="35dp"/>
-    <TextView
+    <EditText
         android:id="@+id/et_education"
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -166,7 +173,7 @@
         android:layout_marginStart="35dp"/>
 
     <EditText
-        android:id="@+id/about"
+        android:id="@+id/et_about"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="30dp"
@@ -193,3 +200,4 @@
 
 
 </LinearLayout>
+</ScrollView>
