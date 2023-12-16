@@ -80,13 +80,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="5dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Contact:"
+            android:layout_marginLeft="5dp"
+            android:text="Company Size:"
             android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_marginLeft="5dp" />
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/userContact"
             android:layout_width="match_parent"
@@ -95,47 +97,33 @@
             android:hint=""
             android:layout_margin="10dp"
             android:inputType="number" />
-
-    </LinearLayout>
-
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Company Website:"
             android:textSize="20dp"
-            android:text="Language"
-            android:textStyle="bold"
-            android:layout_marginRight="53dp"
-            android:layout_marginLeft="5dp"/>
-        <CheckBox
-            android:id="@+id/HTML"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="HTML"
-            android:textSize="15dp"/>
-        <CheckBox
-            android:id="@+id/CSS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CSS"
-            android:textSize="15dp"/>
-        <CheckBox
-            android:id="@+id/PHP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PHP"
-            android:textSize="15dp"/>
+            android:textStyle="bold" />
 
-        <CheckBox
-            android:id="@+id/java"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="JAVA"
-            android:textSize="15dp" />
-    </RadioGroup>
+        <EditText
+            android:id="@+id/cmpyweb"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="20dp"
+            android:hint=""
+            android:layout_margin="10dp" />
+
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="397dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="53dp"
+        android:hint="DPIIT No"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
