@@ -151,6 +151,17 @@ public class PostInformation extends AppCompatActivity {
                 }
             }
         });
+
+
+        //To open website
+        c_website.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(PostInformation.this,Companywebsite.class);
+                intent.putExtra("websiteUrl",companyWebsite);
+                startActivity(intent);
+            }
+        });
     }
 
     private void loadUserInfo() {
