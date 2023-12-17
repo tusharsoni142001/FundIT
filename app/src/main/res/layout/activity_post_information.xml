@@ -88,7 +88,13 @@
               android:text="Description"
               android:textSize="25sp"
               android:textColor="@color/colorBlack" />
+          <WebView
+            android:id="@+id/webview"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:ignore="WebViewLayout">
 
+          </WebView>
           <ImageView
               android:id="@+id/pimagetvco"
               android:layout_width="match_parent"

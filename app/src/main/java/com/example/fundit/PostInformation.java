@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -54,6 +55,7 @@ public class PostInformation extends AppCompatActivity {
     RecyclerView recyclerView;
     List<ModelComment> commentList;
     AdapterComment adapterComment;
+    WebView webview;
     ImageView imagep;
     boolean mlike = false;
     ActionBar actionBar;
@@ -73,6 +75,7 @@ public class PostInformation extends AppCompatActivity {
         image = findViewById(R.id.pimagetvco);
         name = findViewById(R.id.unameco);
         time = findViewById(R.id.utimeco);
+        webview = (WebView) findViewById(R.id.webview);
 
         title = findViewById(R.id.ptitleco);
         myemail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
