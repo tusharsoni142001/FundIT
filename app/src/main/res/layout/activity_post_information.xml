@@ -71,29 +71,40 @@
             </LinearLayout>
 
           </LinearLayout>
+          <TextView
+              android:id="@+id/companyName"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="CompanyName"
+              android:textSize="25sp"
+              android:layout_marginBottom="10dp"
+              android:textStyle="bold" />
 
           <TextView
               android:id="@+id/ptitleco"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:text="Title"
-              android:textSize="25sp"
+              android:textSize="20sp"
               android:layout_marginBottom="10dp"
               android:textStyle="bold" />
 
-          <TextView
-              android:id="@+id/descriptco"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:text="Description"
-              android:textSize="25sp"
-              android:textColor="@color/colorBlack" />
+
 
           <ImageView
               android:id="@+id/pimagetvco"
               android:layout_width="match_parent"
               android:layout_height="200dp"
               android:background="@color/colorWhite" />
+
+          <TextView
+              android:id="@+id/descriptco"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Description"
+              android:textSize="20sp"
+              android:layout_marginBottom="10dp"
+              android:textColor="@color/colorBlack" />
 
           <LinearLayout
               android:layout_width="match_parent"
@@ -131,6 +142,7 @@
                 android:drawableStart="@drawable/share"
                 android:drawableLeft="@drawable/share"
                 android:padding="5dp"
+
                 android:text="SHARE"
                 android:textColor="@color/black" />
 
@@ -152,11 +164,155 @@
           app:cardElevation="3dp"
           app:cardUseCompatPadding="true"
           app:contentPadding="5dp">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-          android:text="Company Details:"/>
+          <TextView
+              android:id="@+id/companyDetails"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Company Details"
+              android:textSize="25sp"
+              android:layout_marginBottom="10dp"
+              android:textStyle="bold" />
+
+          <TextView
+              android:id="@+id/names"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Name"
+              android:textStyle="bold"
+              android:textColor="@color/colorBlack" />
+
+          <TextView
+              android:id="@+id/company_name"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/names"
+              android:layout_alignParentStart="true"
+              android:layout_marginTop="10dp"
+              android:hint="Company Name"
+              android:padding="8dp"
+              />
+          <TextView
+              android:id="@+id/email"
+              android:layout_marginTop="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Email"
+              android:textStyle="bold"
+              android:textColor="@color/colorBlack" />
+
+          <TextView
+              android:id="@+id/company_email"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/names"
+              android:layout_alignParentStart="true"
+              android:layout_marginTop="10dp"
+              android:hint="Company Email"
+              android:padding="8dp"
+              />
+          <TextView
+              android:id="@+id/industry"
+              android:layout_marginTop="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Industry"
+              android:textStyle="bold"
+              android:textColor="@color/colorBlack" />
+
+          <TextView
+              android:id="@+id/company_industry"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/names"
+              android:layout_alignParentStart="true"
+              android:layout_marginTop="10dp"
+              android:hint="Company Industry"
+              android:padding="8dp"
+              />
+          <TextView
+              android:id="@+id/founderyear"
+              android:layout_marginTop="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Founded Year"
+              android:textStyle="bold"
+              android:textColor="@color/colorBlack" />
+
+          <TextView
+              android:id="@+id/company_founded_year"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/names"
+              android:layout_alignParentStart="true"
+              android:layout_marginTop="10dp"
+              android:hint="Company Founded Year"
+              android:padding="8dp"
+              />
+          <TextView
+              android:id="@+id/website"
+              android:layout_marginTop="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Website"
+              android:textStyle="bold"
+              android:textColor="@color/colorBlack" />
+
+          <TextView
+              android:id="@+id/company_website"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/names"
+              android:layout_alignParentStart="true"
+              android:layout_marginTop="10dp"
+              android:hint="Company Website"
+              android:padding="8dp"
+              />
+          <TextView
+              android:id="@+id/size"
+              android:layout_marginTop="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Comapny size"
+              android:textStyle="bold"
+              android:textColor="@color/colorBlack" />
+
+          <TextView
+              android:id="@+id/company_size"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/names"
+              android:layout_alignParentStart="true"
+              android:layout_marginTop="10dp"
+              android:hint="Company Size"
+              android:padding="8dp"
+              />
+          <TextView
+              android:id="@+id/about"
+              android:layout_marginTop="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="About"
+              android:textStyle="bold"
+              android:textColor="@color/colorBlack" />
+
+          <TextView
+              android:id="@+id/company_about"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/names"
+              android:layout_alignParentStart="true"
+              android:layout_marginTop="10dp"
+              android:hint="About Company"
+              android:padding="8dp"
+              />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
       </androidx.cardview.widget.CardView>
       </ScrollView>
 

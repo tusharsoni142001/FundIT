@@ -27,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,21 +44,19 @@ import java.util.Locale;
 public class PostInformation extends AppCompatActivity {
 
 
-    String hisuid, ptime, myuid, myname, myemail, mydp, uimage, postId, plike, hisdp, hisname, uemail;
+    String  ptime, myuid, myname, myemail, mydp, uimage, postId, plike, hisdp, hisname, uemail;
+    String companyName,companyEmail,companyIndustry,companyFoundedYear,companyWebsite,companySize,companyAbout;
     ImageView picture, image;
-    TextView name, time, title, description, like, tcomment;
+    TextView cname,name, time, title, description;
+    TextView c_name,c_email,c_industry,c_founded_year,c_website,c_size,c_about;
     ImageButton more;
     Button contactbtn, share;
     LinearLayout profile;
-    EditText comment;
-    ImageButton sendb;
-    RecyclerView recyclerView;
-    List<ModelComment> commentList;
-    AdapterComment adapterComment;
     ImageView imagep;
-    boolean mlike = false;
     ActionBar actionBar;
     ProgressDialog progressDialog;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser currentUser = mAuth.getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +66,18 @@ public class PostInformation extends AppCompatActivity {
         actionBar.setTitle("Post Details");
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
+
+
+
+
+        /*-----------------Post Information-----------------------*/
         postId = getIntent().getStringExtra("pid");
         //recyclerView = findViewById(R.id.recyclecomment);
         picture = findViewById(R.id.pictureco);
         image = findViewById(R.id.pimagetvco);
         name = findViewById(R.id.unameco);
         time = findViewById(R.id.utimeco);
+        cname=findViewById(R.id.companyName);
 
         title = findViewById(R.id.ptitleco);
         myemail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
@@ -89,26 +94,34 @@ public class PostInformation extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         loadPostInfo();
         loadUserInfo();
+        loadCompanyInfo();
         //setLikes();
         actionBar.setSubtitle("SignedInAs:" + myemail);
-       // loadComments();
-       /* sendb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                postComment();
-            }
-        });*/
+
+
+        /*-----------------Company Information-----------------------*/
+        c_name=findViewById(R.id.company_name);
+        c_email=findViewById(R.id.company_email);
+        c_industry=findViewById(R.id.company_industry);
+        c_founded_year=findViewById(R.id.company_founded_year);
+        c_website=findViewById(R.id.company_website);
+        c_size=findViewById(R.id.company_size);
+        c_about=findViewById(R.id.company_about);
+
+
+
+
         contactbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent emailIntent=new Intent(Intent.ACTION_SEND);
 
                 // Default Subject
-                String defaultSubject = "Exploring Collaboration: [Your Startup Name]";
+                String defaultSubject = "Exploring Collaboration: "+companyName;
 
                 // Default Body
                 String defaultBody = "Dear "+hisname+",\n\n" +
-                        "I hope this email finds you well. My name is "+myname+", and I am reaching out to express my interest in learning more about your startup, [Your Startup Name].\n\n" +
+                        "I hope this email finds you well. My name is "+myname+", and I am reaching out to express my interest in learning more about your startup, "+companyName+".\n\n" +
                         "I am an investor interested in exploring potential investment opportunities, and I believe that your startup has great potential. I would appreciate the opportunity to discuss this further with you and learn more about your vision and plans for the future.\n\n" +
                         "Please let me know if you would be available for a meeting or a call at your earliest convenience. I am excited about the prospect of potentially working together and contributing to the success of [Your Startup Name].\n\n" +
                         "Thank you for considering my inquiry. I look forward to hearing from you.\n\n" +
@@ -138,121 +151,7 @@ public class PostInformation extends AppCompatActivity {
                 }
             }
         });
-       /* like.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PostInformation.this, PostLikedByActivity.class);
-                intent.putExtra("pid", postId);
-                startActivity(intent);
-            }
-        });*/
     }
-
-    /*private void loadComments() {
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        commentList = new ArrayList<>();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(postId).child("Comments");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                commentList.clear();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    ModelComment modelComment = dataSnapshot1.getValue(ModelComment.class);
-                    commentList.add(modelComment);
-                    adapterComment = new AdapterComment(getApplicationContext(), commentList, myuid, postId);
-                    recyclerView.setAdapter(adapterComment);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }*/
-
-   /* private void setLikes() {
-        final DatabaseReference liekeref = FirebaseDatabase.getInstance().getReference().child("Likes");
-        liekeref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                if (dataSnapshot.child(postId).hasChild(myuid)) {
-                    likebtn.setText("Liked");
-                } else {
-                    likebtn.setText("Like");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }*/
-
-  /*
-    private void postComment() {
-        progressDialog.setMessage("Adding Comment");
-
-        final String commentss = comment.getText().toString().trim();
-        if (TextUtils.isEmpty(commentss)) {
-            Toast.makeText(PostInformation.this, "Empty comment", Toast.LENGTH_LONG).show();
-            return;
-        }
-        progressDialog.show();
-        String timestamp = String.valueOf(System.currentTimeMillis());
-        DatabaseReference datarf = FirebaseDatabase.getInstance().getReference("Posts").child(postId).child("Comments");
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("cId", timestamp);
-        hashMap.put("comment", commentss);
-        hashMap.put("ptime", timestamp);
-        hashMap.put("uid", myuid);
-        hashMap.put("uemail", myemail);
-        hashMap.put("udp", mydp);
-        hashMap.put("uname", myname);
-        datarf.child(timestamp).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                progressDialog.dismiss();
-                Toast.makeText(PostInformation.this, "Added", Toast.LENGTH_LONG).show();
-                comment.setText("");
-                updatecommetcount();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
-                Toast.makeText(PostInformation.this, "Failed", Toast.LENGTH_LONG).show();
-            }
-        });
-    }*/
-
-    /*boolean count = false;
-
-    private void updatecommetcount() {
-        count = true;
-        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(postId);
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (count) {
-                    String comments = "" + dataSnapshot.child("pcomments").getValue();
-                    int newcomment = Integer.parseInt(comments) + 1;
-                    reference.child("pcomments").setValue("" + newcomment);
-                    count = false;
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }*/
 
     private void loadUserInfo() {
 
@@ -278,8 +177,6 @@ public class PostInformation extends AppCompatActivity {
             }
         });
     }
-
-
 
     private void loadPostInfo() {
 
@@ -342,6 +239,47 @@ public class PostInformation extends AppCompatActivity {
 
     }
 
+    private void loadCompanyInfo() {
+        String uid = currentUser.getUid();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Companies");
+        Query query = databaseReference.orderByChild("uid").equalTo(uid);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+
+
+                    companyName=getStringValue(dataSnapshot1.child("companyName"));
+                    companyEmail=getStringValue(dataSnapshot1.child("companyEmail"));
+                    companyIndustry=getStringValue(dataSnapshot1.child("companyIndustry"));
+                    companyFoundedYear=getStringValue(dataSnapshot1.child("foundedYear"));
+                    companyWebsite=getStringValue(dataSnapshot1.child("companyWebsite"));
+                    companySize=getStringValue(dataSnapshot1.child("companySize"));
+                    companyAbout=getStringValue(dataSnapshot1.child("companyAbout"));
+
+
+                    cname.setText(companyName); //Post Heading
+                    c_name.setText(companyName); //Company information
+                    c_email.setText(companyEmail);
+                    c_industry.setText(companyIndustry);
+                    c_founded_year.setText(companyFoundedYear);
+                    c_website.setText(companyWebsite);
+                    c_size.setText(companySize);
+                    c_about.setText(companyAbout);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle database error
+            }
+
+            private String getStringValue(DataSnapshot dataSnapshot) {
+                return dataSnapshot.getValue() != null ? dataSnapshot.getValue().toString() : "";
+            }
+        });
+
+    }
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

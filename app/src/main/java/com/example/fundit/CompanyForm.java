@@ -31,7 +31,7 @@ import java.util.regex.Pattern;
 
 public class CompanyForm extends AppCompatActivity {
     TextView companyName ;
-    EditText cemail,AbtCompany,foundedyear,cwebsite,dpiitno,csize;
+    EditText cemail,AbtCompany,foundedyear,cwebsite,dpiitno,csize,industry;
     Button submitbtn;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -49,6 +49,7 @@ public class CompanyForm extends AppCompatActivity {
         dpiitno = findViewById(R.id.c_dpiitno);
         AbtCompany = findViewById(R.id.et_about);
         csize=findViewById(R.id.companysize);
+        industry=findViewById(R.id.c_industry);
 
         String uid = currentUser.getUid();
         submitbtn=findViewById(R.id.btnsubmit);
@@ -68,6 +69,7 @@ public class CompanyForm extends AppCompatActivity {
                     String companySize = "" + dataSnapshot1.child("companySize").getValue();
                     String DPIITno=""+dataSnapshot1.child("DPIITno").getValue();
                     String companyAbout=""+dataSnapshot1.child("companyAbout").getValue();
+                    String companyIndustry=""+dataSnapshot1.child("companyIndustry").getValue();
 
 
                     if (dataSnapshot1.hasChild("foundedYear")) {
@@ -132,6 +134,16 @@ public class CompanyForm extends AppCompatActivity {
                         }
                     }
 
+                    if (dataSnapshot1.hasChild("companyIndustry")) {
+                        // If field exists, retrieve its value
+                        companyIndustry = "" + dataSnapshot1.child("companyIndustry").getValue();
+
+                        // Check if the retrieved value is not null before using it
+                        if (companyIndustry != null) {
+                            industry.setText(companyIndustry);
+                        }
+                    }
+
                     companyName.setText(cname);
 
                 }
@@ -186,6 +198,7 @@ public class CompanyForm extends AppCompatActivity {
                 String companyDpiitno = dpiitno.getText().toString();
                 String aboutCompany = AbtCompany.getText().toString();
                 String companySize = csize.getText().toString();
+                String companyIndustry = industry.getText().toString();
 
                 //Regex for DPIIT number
                 String regexPattern = "^(DIPP|DPIIT)\\d{5}$";
@@ -214,6 +227,7 @@ public class CompanyForm extends AppCompatActivity {
                 updatedData.put("DPIITno", companyDpiitno);
                 updatedData.put("companyAbout", aboutCompany);
                 updatedData.put("companySize", companySize);
+                updatedData.put("companyIndustry", companyIndustry);
 
                 // Update the existing data and add new fields
                 reference.updateChildren(updatedData)
