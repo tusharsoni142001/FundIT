@@ -18,7 +18,8 @@
             android:text="Startup Information"
             android:textColor="#307D7E"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:inputType="number"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -84,7 +85,7 @@
             android:layout_marginRight="30dp"
             android:background="@drawable/edittext_background"
             android:hint="Enter year"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:paddingStart="10dp"
             android:paddingTop="12dp"
             android:required="true"
@@ -99,7 +100,29 @@
             android:layout_marginStart="35dp"/>
 
         <EditText
-            android:id="@+id/et_experience"
+            android:id="@+id/c_website"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/edittext_background"
+            android:hint=""
+            android:inputType="textPersonName"
+            android:paddingStart="10dp"
+            android:paddingTop="12dp"
+            android:required="true"
+            android:textSize="19sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Industry:"
+            android:textStyle="bold"
+            android:layout_marginStart="35dp"/>
+
+        <EditText
+            android:id="@+id/c_industry"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginLeft="30dp"
@@ -129,7 +152,7 @@
             android:layout_marginRight="30dp"
             android:background="@drawable/edittext_background"
             android:hint=""
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:paddingStart="10dp"
 
             android:required="true"
@@ -145,8 +168,10 @@
             android:hint="DPIIT No:"
             android:textStyle="bold"
             android:layout_marginStart="35dp"/>
+
+
         <EditText
-            android:id="@+id/et_education"
+            android:id="@+id/c_dpiitno"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginLeft="30dp"
@@ -159,100 +184,6 @@
 
             android:required="true"
             android:textSize="19sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="Revenue:"
-            android:textStyle="bold"
-            android:layout_marginStart="35dp"/>
-
-        <EditText
-            android:id="@+id/revenue"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/edittext_background"
-            android:hint=""
-            android:inputType="number"
-            android:paddingStart="10dp"
-            android:paddingTop="12dp"
-            android:required="true"
-            android:textSize="19sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="Growth rate:"
-            android:textStyle="bold"
-            android:layout_marginStart="35dp"/>
-
-        <EditText
-            android:id="@+id/growthrate"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/edittext_background"
-            android:hint=""
-            android:inputType="number"
-            android:paddingStart="10dp"
-            android:paddingTop="12dp"
-            android:required="true"
-            android:textSize="19sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="Churn rate:"
-            android:textStyle="bold"
-            android:layout_marginStart="35dp"/>
-
-        <EditText
-            android:id="@+id/churnrate"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/edittext_background"
-            android:hint=""
-            android:inputType="number"
-            android:paddingStart="10dp"
-            android:paddingTop="12dp"
-            android:required="true"
-            android:textSize="19sp" />
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="Burn rate:"
-            android:textStyle="bold"
-            android:layout_marginStart="35dp"/>
-
-        <EditText
-            android:id="@+id/Burnrate"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/edittext_background"
-            android:hint="r"
-            android:inputType="number"
-            android:paddingStart="10dp"
-            android:paddingTop="12dp"
-            android:required="true"
-            android:textSize="19sp" />
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -275,7 +206,6 @@
             android:paddingStart="10dp"
             android:required="true"
             android:textSize="19sp" />
-
 
         <Button
             android:id="@+id/btnsubmit"

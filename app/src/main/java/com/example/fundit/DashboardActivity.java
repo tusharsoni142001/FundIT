@@ -10,6 +10,12 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -18,6 +24,8 @@ public class DashboardActivity extends AppCompatActivity {
     String myuid;
     ActionBar actionBar;
     BottomNavigationView navigationView;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser currentUser = mAuth.getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +63,40 @@ public class DashboardActivity extends AppCompatActivity {
 
                 case R.id.nav_profile:
                     actionBar.setTitle("Profile");
-                    ProfileFragment fragment1 = new ProfileFragment();
-                    FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction1.replace(R.id.content, fragment1);
-                    fragmentTransaction1.commit();
+                    String uid = currentUser.getUid();
+                    final String[] userType = new String[1];
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+                    Query query = databaseReference.orderByChild("uid").equalTo(uid);
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                userType[0] = "" + dataSnapshot1.child("userType").getValue(); // Remove the String declaration
+                            }
+
+                            // Now you can check the userType and replace the fragment.
+                            if ("Founder".equals(userType[0])) {
+                                ProfileFragment fragment1 = new ProfileFragment();
+                                FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
+                                fragmentTransaction1.replace(R.id.content, fragment1);
+                                fragmentTransaction1.commit();
+                            } else if ("Investor".equals(userType[0])) {
+                                InvestorProfile fragment12 = new InvestorProfile();
+                                FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
+                                fragmentTransaction1.replace(R.id.content, fragment12);
+                                fragmentTransaction1.commit();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            // Handle onCancelled
+                        }
+                    });
                     return true;
+
+
+
 
                 case R.id.nav_users:
                     actionBar.setTitle("Users");

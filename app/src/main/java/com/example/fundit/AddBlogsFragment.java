@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -69,6 +71,9 @@ public class AddBlogsFragment extends Fragment {
     String name, email, uid, dp;
     DatabaseReference databaseReference;
     Button upload;
+
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser currentUser = mAuth.getCurrentUser();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -120,30 +125,55 @@ public class AddBlogsFragment extends Fragment {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String titl = "" + title.getText().toString().trim();
-                String description = "" + des.getText().toString().trim();
 
-                // If empty set error
-                if (TextUtils.isEmpty(titl)) {
-                    title.setError("Title Cant be empty");
-                    Toast.makeText(getContext(), "Title can't be left empty", Toast.LENGTH_LONG).show();
-                    return;
-                }
+                //Check if Founder has Added Company details
+                String uid = currentUser.getUid();
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Companies");
+                Query query = databaseReference.orderByChild("uid").equalTo(uid);
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (!dataSnapshot.exists()) {
+                            Toast.makeText(getContext(), "Add company details", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        else
+                        {
+                            String titl = "" + title.getText().toString().trim();
+                            String description = "" + des.getText().toString().trim();
 
-                // If empty set error
-                if (TextUtils.isEmpty(description)) {
-                    des.setError("Description Cant be empty");
-                    Toast.makeText(getContext(), "Description can't be left empty", Toast.LENGTH_LONG).show();
-                    return;
-                }
+                            // If empty set error
+                            if (TextUtils.isEmpty(titl)) {
+                                title.setError("Title Cant be empty");
+                                Toast.makeText(getContext(), "Title can't be left empty", Toast.LENGTH_LONG).show();
+                                return;
+                            }
 
-                // If empty show error
-                if (imageuri == null) {
-                    Toast.makeText(getContext(), "Select an Image", Toast.LENGTH_LONG).show();
-                    return;
-                } else {
-                    uploadData(titl, description);
-                }
+                            // If empty set error
+                            if (TextUtils.isEmpty(description)) {
+                                des.setError("Description Cant be empty");
+                                Toast.makeText(getContext(), "Description can't be left empty", Toast.LENGTH_LONG).show();
+                                return;
+                            }
+
+                            // If empty show error
+                            if (imageuri == null) {
+                                Toast.makeText(getContext(), "Select an Image", Toast.LENGTH_LONG).show();
+                                return;
+                            } else {
+                                uploadData(titl, description);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Handle any errors that may occur during the database query
+                        Log.e("Firebase", "Error fetching data", databaseError.toException());
+                    }
+                });
+
+
             }
         });
         return view;
