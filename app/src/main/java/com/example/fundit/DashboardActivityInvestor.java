@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -69,26 +70,22 @@ public class DashboardActivityInvestor extends AppCompatActivity {
                     actionBar.setTitle("Profile");
                     String uid = currentUser.getUid();
                     final String[] userType = new String[1];
-                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+                    DatabaseReference databaseReference =
+                            FirebaseDatabase.getInstance().getReference("Users");
                     Query query = databaseReference.orderByChild("uid").equalTo(uid);
                     query.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                userType[0] = "" + dataSnapshot1.child("userType").getValue(); // Remove the String declaration
+                                userType[0] =
+                                        "" + dataSnapshot1.child("userType").getValue();
                             }
 
                             // Now you can check the userType and replace the fragment.
                             if ("Founder".equals(userType[0])) {
-                                ProfileFragment fragment1 = new ProfileFragment();
-                                FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
-                                fragmentTransaction1.replace(R.id.content, fragment1);
-                                fragmentTransaction1.commit();
+                                replaceFragment(new ProfileFragment());
                             } else if ("Investor".equals(userType[0])) {
-                                InvestorProfile fragment12 = new InvestorProfile();
-                                FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
-                                fragmentTransaction1.replace(R.id.content, fragment12);
-                                fragmentTransaction1.commit();
+                                replaceFragment(new InvestorProfile());
                             }
                         }
 
@@ -129,4 +126,11 @@ public class DashboardActivityInvestor extends AppCompatActivity {
             return false;
         }
     };
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.content, fragment, "");
+        fragmentTransaction.commit();
+    }
+
 }

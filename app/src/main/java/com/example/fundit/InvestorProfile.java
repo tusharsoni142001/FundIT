@@ -52,7 +52,7 @@ public class InvestorProfile extends Fragment {
     AdapterPosts adapterPosts;
     String uid;
     ProgressDialog pd;
-    Button eprofile,company,uposts;
+    Button eprofile,company,bio;
     private static final int CAMERA_REQUEST = 100;
     private static final int STORAGE_REQUEST = 200;
     private static final int IMAGEPICK_GALLERY_REQUEST = 300;
@@ -89,6 +89,8 @@ public class InvestorProfile extends Fragment {
 
         eprofile=view.findViewById(R.id.editprofile);
         company=view.findViewById(R.id.companyDetails);
+        bio=view.findViewById(R.id.userPosts);
+
 
         // Retrieving user data from firebase
         Query query = databaseReference.orderByChild("email").equalTo(firebaseUser.getEmail());
@@ -127,14 +129,21 @@ public class InvestorProfile extends Fragment {
         eprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getContext(),founderform.class);
+                Intent intent=new Intent(getContext(),InvestorForm.class);
                 startActivity(intent);
             }
         });
         company.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getContext(),CompanyForm.class);
+                Intent intent=new Intent(getContext(),Investorinvestment.class);
+                startActivity(intent);
+            }
+        });
+        bio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(),Investorinvestment.class);
                 startActivity(intent);
             }
         });

@@ -4,13 +4,10 @@ package com.example.fundit;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,12 +17,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,10 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 
 public class PostInformation extends AppCompatActivity {
@@ -94,6 +85,7 @@ public class PostInformation extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         loadPostInfo();
         loadUserInfo();
+        hideContactButton();
 
         //setLikes();
         actionBar.setSubtitle("SignedInAs:" + myemail);
@@ -294,6 +286,35 @@ public class PostInformation extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void hideContactButton()
+    {
+        String uid = currentUser.getUid();
+        final String[] userType = new String[1];
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        Query query = databaseReference.orderByChild("uid").equalTo(uid);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    userType[0] = "" + dataSnapshot1.child("userType").getValue(); // Remove the String declaration
+                }
+
+                // Now you can check the userType and replace the fragment.
+                if ("Founder".equals(userType[0])) {
+                    contactbtn.setVisibility(View.GONE);
+                } else if ("Investor".equals(userType[0])) {
+                    contactbtn.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle onCancelled
+            }
+        });
+        return;
     }
     @Override
     public boolean onSupportNavigateUp() {

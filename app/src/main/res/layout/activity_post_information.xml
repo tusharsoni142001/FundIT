@@ -122,29 +122,9 @@
               android:gravity="center"
               android:orientation="horizontal">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/contact"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:autoLink="all"
-                android:background="@drawable/rounded_corner_blue"
-                android:padding="5dp"
-                android:text="Contact Founder"
-                android:textColor="@color/black" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/share"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_corner"
-                android:drawableStart="@drawable/share"
-                android:drawableLeft="@drawable/share"
-                android:padding="5dp"
 
-                android:text="SHARE"
-                android:textColor="@color/black" />
+
 
           </LinearLayout>
 
@@ -310,6 +290,17 @@
               android:hint="About Company"
               android:padding="8dp"
               />
+          <androidx.appcompat.widget.AppCompatButton
+              android:id="@+id/contact"
+              android:layout_marginTop="20dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:autoLink="all"
+              android:background="@drawable/rounded_corner_blue"
+              android:padding="5dp"
+              android:text="Contact Founder"
+              android:textColor="@color/black" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 

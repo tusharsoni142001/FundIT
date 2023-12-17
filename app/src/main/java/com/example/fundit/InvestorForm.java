@@ -39,7 +39,7 @@ import java.util.HashMap;
 
 public class InvestorForm extends AppCompatActivity {
     private TextView email, name;
-    EditText experience,education,about;
+    EditText experience,education,about,previousInvestmentet;
     CheckBox cb1,cb2,cb3,cb4;
     private Button submit;
     FirebaseUser firebaseUser;
@@ -47,14 +47,14 @@ public class InvestorForm extends AppCompatActivity {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser currentUser = mAuth.getCurrentUser();
 
-    String uexperience,ueducation,uabout;
+    String uexperience,ueducation,uabout,previousInvestment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_investor_form);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Founder");
+        actionBar.setTitle("Investor");
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -63,6 +63,7 @@ public class InvestorForm extends AppCompatActivity {
         name = findViewById(R.id.i_name);
         experience = findViewById(R.id.i_experience);
         education = findViewById(R.id.i_education);
+        previousInvestmentet = findViewById(R.id.i_previousInvestment);
         about = findViewById(R.id.i_about);
         cb1=findViewById(R.id.i_expertise_product);
         cb2=findViewById(R.id.i_expertise_business);
@@ -124,6 +125,16 @@ public class InvestorForm extends AppCompatActivity {
                         // Check if the retrieved value is not null before using it
                         if (uabout != null) {
                             about.setText(uabout);
+                        }
+                    }
+
+                    if (dataSnapshot1.hasChild("previousInvestment")) {
+                        // If field exists, retrieve its value
+                        String previousInvestment = "" + dataSnapshot1.child("previousInvestment").getValue();
+
+                        // Check if the retrieved value is not null before using it
+                        if (previousInvestment != null) {
+                            previousInvestmentet.setText(previousInvestment);
                         }
                     }
 
@@ -204,6 +215,7 @@ public class InvestorForm extends AppCompatActivity {
                 uexperience=experience.getText().toString();
                 ueducation=education.getText().toString();
                 uabout=about.getText().toString();
+                previousInvestment=previousInvestmentet.getText().toString();
                 String expertise=null;
 
                 if(cb1.isChecked())
@@ -267,6 +279,7 @@ public class InvestorForm extends AppCompatActivity {
                 updatedData.put("expertise", expertise);
                 updatedData.put("education", ueducation);
                 updatedData.put("about",uabout);
+                updatedData.put("previousInvestment",previousInvestment);
 
                 // Update the existing data and add new fields
                 reference.updateChildren(updatedData)
@@ -274,7 +287,8 @@ public class InvestorForm extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(InvestorForm.this, "User updated successfully", Toast.LENGTH_LONG).show();
-                                finish();
+                                Intent intent=new Intent(InvestorForm.this,InvestorProfile.class);
+                                startActivity(intent);
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
