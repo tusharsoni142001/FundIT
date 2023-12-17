@@ -81,6 +81,7 @@ public class ProfileFragment extends Fragment {
         email = view.findViewById(R.id.emailtv);
         uid = FirebaseAuth.getInstance().getUid();
         fab = view.findViewById(R.id.fab);
+        uposts=view.findViewById(R.id.userPosts);
  //       postrecycle = view.findViewById(R.id.recyclerposts);
         posts = new ArrayList<>();
         pd = new ProgressDialog(getActivity());
@@ -135,6 +136,14 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getContext(),CompanyForm.class);
+                startActivity(intent);
+            }
+        });
+
+        uposts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(),UserPosts.class);
                 startActivity(intent);
             }
         });

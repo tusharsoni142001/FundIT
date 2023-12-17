@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivityInvestor extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -31,7 +31,7 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_dashboard_investor);
         actionBar = getSupportActionBar();
         actionBar.setTitle("Profile Activity");
         firebaseAuth = FirebaseAuth.getInstance();
@@ -48,6 +48,8 @@ public class DashboardActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.content, fragment, "");
         fragmentTransaction.commit();
     }
+
+
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener selectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {

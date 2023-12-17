@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,8 +25,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -181,11 +186,42 @@ public class LoginActivity extends AppCompatActivity {
                         // storing the value in Firebase
                         reference.child(uid).setValue(hashMap);
                     }
+
                     Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_LONG).show();
-                    Intent mainIntent = new Intent(LoginActivity.this, DashboardActivity.class);
-                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(mainIntent);
-                    finish();
+
+
+                    String emaill = email.getText().toString().trim();
+                    final String[] userType = new String[1];
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+                    Query query = databaseReference.orderByChild("email").equalTo(emaill);
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                userType[0] = "" + dataSnapshot1.child("userType").getValue(); // Remove the String declaration
+                            }
+
+                            // Now you can check the userType and replace the fragment.
+                            if ("Founder".equals(userType[0])) {
+                                Intent mainIntent = new Intent(LoginActivity.this, DashboardActivity.class);
+                                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(mainIntent);
+                                finish();
+                            } else if ("Investor".equals(userType[0])) {
+                                Intent mainIntent = new Intent(LoginActivity.this, DashboardActivityInvestor.class);
+                                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(mainIntent);
+                                finish();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            // Handle onCancelled
+                        }
+                    });
+
+
                 } else {
                     loadingBar.dismiss();
                     Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();

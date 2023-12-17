@@ -123,7 +123,7 @@ public class PostInformation extends AppCompatActivity {
                 String defaultBody = "Dear "+hisname+",\n\n" +
                         "I hope this email finds you well. My name is "+myname+", and I am reaching out to express my interest in learning more about your startup, "+companyName+".\n\n" +
                         "I am an investor interested in exploring potential investment opportunities, and I believe that your startup has great potential. I would appreciate the opportunity to discuss this further with you and learn more about your vision and plans for the future.\n\n" +
-                        "Please let me know if you would be available for a meeting or a call at your earliest convenience. I am excited about the prospect of potentially working together and contributing to the success of [Your Startup Name].\n\n" +
+                        "Please let me know if you would be available for a meeting or a call at your earliest convenience. I am excited about the prospect of potentially working together and contributing to the success of "+companyName+".\n\n" +
                         "Thank you for considering my inquiry. I look forward to hearing from you.\n\n" +
                         "Best regards,\n" +
                         myname+"\n";

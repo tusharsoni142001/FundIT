@@ -18,6 +18,20 @@
         android:theme="@style/Theme.FundIT"
         tools:targetApi="31">
         <activity
+            android:name=".DashboardActivityInvestor"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".UserPosts"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".InvestorForm"
             android:exported="false">
             <meta-data
