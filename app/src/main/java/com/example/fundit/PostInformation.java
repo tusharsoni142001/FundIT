@@ -44,7 +44,7 @@ import java.util.Locale;
 public class PostInformation extends AppCompatActivity {
 
 
-    String  ptime, myuid, myname, myemail, mydp, uimage, postId, plike, hisdp, hisname, uemail;
+    String  hisuid,ptime, myuid, myname, myemail, mydp, uimage, postId, plike, hisdp, hisname, uemail;
     String companyName,companyEmail,companyIndustry,companyFoundedYear,companyWebsite,companySize,companyAbout;
     ImageView picture, image;
     TextView cname,name, time, title, description;
@@ -94,7 +94,7 @@ public class PostInformation extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         loadPostInfo();
         loadUserInfo();
-        loadCompanyInfo();
+
         //setLikes();
         actionBar.setSubtitle("SignedInAs:" + myemail);
 
@@ -201,7 +201,7 @@ public class PostInformation extends AppCompatActivity {
                     String descriptions = getStringValue(dataSnapshot1.child("description"));
                     uimage = getStringValue(dataSnapshot1.child("uimage"));
                     hisdp = getStringValue(dataSnapshot1.child("udp"));
-                    // hisuid = dataSnapshot1.child("uid").getValue().toString();
+                    hisuid = dataSnapshot1.child("uid").getValue().toString();
                     uemail = getStringValue(dataSnapshot1.child("uemail"));
                     hisname = getStringValue(dataSnapshot1.child("uname"));
                     ptime = getStringValue(dataSnapshot1.child("ptime"));
@@ -236,6 +236,7 @@ public class PostInformation extends AppCompatActivity {
                         // Handle Glide exception
                     }
                 }
+                loadCompanyInfo();
             }
 
             @Override
@@ -248,12 +249,15 @@ public class PostInformation extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     private void loadCompanyInfo() {
-        String uid = currentUser.getUid();
+        //String uid = currentUser.getUid();
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Companies");
-        Query query = databaseReference.orderByChild("uid").equalTo(uid);
+        Query query = databaseReference.orderByChild("uid").equalTo(hisuid);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
